@@ -1,0 +1,21 @@
+body {
+  box-sizing: border-box;
+}
+
+.fieldsWrapper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 30rem;
+}
+
+.field {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid darkgray;
+}
