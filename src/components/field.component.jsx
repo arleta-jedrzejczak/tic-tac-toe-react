@@ -8,19 +8,17 @@ class Field extends Component {
         isClicked: props.isClicked,
         isPlayer1Owned: props.isPlayer1Owned
     };
-    this.onFieldClick = this.onFieldClick.bind(this);
+    this.clickHandler = this.clickHandler.bind(this);
   }
 
-  onFieldClick(event) {
+    clickHandler(event) {
+      event.persist();
       console.log(event);
-      this.setState({
-        [event.target.id]: event.target.value
-      });
-  }
+  };
 
   render() {
       return(
-          <div className="field" onClick={this.onFieldClick}>
+          <div className="field" onClick={this.props.clickHandler}>
               {this.state.isClicked &&
                   <h2>{this.state.isPlayer1Owned ? 'o' : 'x'}</h2>
               }
