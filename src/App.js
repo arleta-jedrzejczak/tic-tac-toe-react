@@ -15,6 +15,7 @@ class App extends Component {
         isPlaying: false,
         isPlayerOne: false,
         isWon: false,
+        isDraw: false,
         player1Fields: [],
         player2Fields: [],
         fields: App.prepareFields()
@@ -45,6 +46,7 @@ class App extends Component {
     }
 
     checkFields(isPlayerOneResults) {
+        const isNotUnclickedField = !this.state.fields.find((element) => element.isClicked === false);
         let playerResultsArray = isPlayerOneResults ? this.state.player1Fields : this.state.player2Fields;
         for (let i = 0; i < resultsArray.length; i++) {
             let a = resultsArray[i][0];
@@ -56,7 +58,16 @@ class App extends Component {
                     isPlaying: false
                 });
             }
+        } if (isNotUnclickedField && !this.state.isDraw) {
+            this.drawGame();
         }
+    }
+
+    drawGame() {
+        this.setState({
+            isDraw: true,
+            isPlaying: false
+        });
     }
 
     fieldClickHandler(field) {
@@ -75,8 +86,8 @@ class App extends Component {
                 };
             });
             this.updatePlayersArrays(field);
+            this.changeTurn();
         }
-        this.changeTurn();
     }
 
     updatePlayersArrays(field) {
@@ -137,7 +148,7 @@ class App extends Component {
                         })
                     }
                 </div>
-                <Score isWon={this.state.isWon} isPlayerOne={!this.state.isPlayerOne}/>
+                <Score isWon={this.state.isWon} isPlayerOne={!this.state.isPlayerOne} isDraw={this.state.isDraw}/>
             </div>
         )
     }
